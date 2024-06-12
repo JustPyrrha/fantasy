@@ -1,3 +1,6 @@
+### py dumbassary notice
+quick porting to 1.21-rc1 since i needed this for ModFest: Carnival. also published to `https://maven.pyrrha.gay/modfest-deps/` maven for the same reason, will replace with actual version once its up
+
 # Fantasy
 Fantasy is a library that allows for dimensions to be created and destroyed at runtime on the server.
 It supports both temporary dimensions which do not get saved, as well as persistent dimensions which can be safely used across server restarts.
