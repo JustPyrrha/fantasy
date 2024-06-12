@@ -3,7 +3,6 @@ package xyz.nucleoid.fantasy.test;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.command.argument.IdentifierArgumentType;
 import net.minecraft.registry.RegistryKeys;
@@ -11,7 +10,6 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.profiler.Profiler;
 import net.minecraft.world.TeleportTarget;
 import org.slf4j.Logger;
 import xyz.nucleoid.fantasy.Fantasy;
@@ -20,7 +18,6 @@ import xyz.nucleoid.fantasy.RuntimeWorldHandle;
 import xyz.nucleoid.fantasy.util.VoidChunkGenerator;
 
 import java.util.HashMap;
-import java.util.WeakHashMap;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -68,7 +65,7 @@ public final class FantasyInitializer implements ModInitializer {
 
                                     ref.t = System.currentTimeMillis();
                                     if (source.getEntity() != null) {
-                                        FabricDimensions.teleport(source.getEntity(), x.asWorld(), new TeleportTarget(new Vec3d(0, 100, 0), Vec3d.ZERO, 0, 0));
+                                        source.getEntity().teleportTo(new TeleportTarget(x.asWorld(), new Vec3d(0, 100, 0), Vec3d.ZERO, 0, 0, TeleportTarget.NO_OP));
                                     }
 
                                     source.sendFeedback(() -> Text.literal("Teleport: " + (System.currentTimeMillis() - ref.t)), false);
