@@ -29,8 +29,8 @@ public abstract class ServerChunkLoadingManagerMixin {
     @Unique
     private ChunkGenerator fantasy$capturedChunkGenerator;
 
-    // shifts directly after the super call
-    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;clone()Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;", shift = At.Shift.BEFORE))
+    // shifts directly before the wrapped operation below
+    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/chunk/ChunkGeneratorSettings;createMissingSettings()Lnet/minecraft/world/gen/chunk/ChunkGeneratorSettings;", shift = At.Shift.BEFORE))
     private void fantasy$captureChunkGenerator(ServerWorld world, LevelStorage.Session session, DataFixer dataFixer, StructureTemplateManager structureTemplateManager, Executor executor, ThreadExecutor mainThreadExecutor, ChunkProvider chunkProvider, ChunkGenerator chunkGenerator, WorldGenerationProgressListener worldGenerationProgressListener, ChunkStatusChangeListener chunkStatusChangeListener, Supplier persistentStateManagerFactory, int viewDistance, boolean dsync, CallbackInfo ci) {
         this.fantasy$capturedChunkGenerator = chunkGenerator;
     }
